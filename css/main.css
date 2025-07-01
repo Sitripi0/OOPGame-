@@ -1,0 +1,42 @@
+body{
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   background-color: grey;
+   
+}
+#start-screen{
+
+}
+
+#player {
+    background-color: blue;
+    position:absolute;
+  
+}
+.obstacle{
+
+}
+
+.obstacle.harmful{
+    background-color: red;
+    position: absolute;
+
+}
+
+.obstacle.helpful {
+    background-color: green;
+    position: absolute;
+}
+
+#lives {
+    font-size:5vw;
+    
+    
+}
+
+#gameover{
+
+    text-align: end;  
+
+}
