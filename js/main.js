@@ -1,4 +1,4 @@
-
+const helpfulImages = ["kebab.png", "frites.png", "kapsalon.png"];
 class Player {
 
     constructor() {
@@ -30,7 +30,7 @@ class Player {
 
 
     moveRight() {
-        if (this.positionX + this.width < 100) { 
+        if (this.positionX + this.width < 100) {
             this.positionX++;
             this.updatePlayerPosition();
 
@@ -40,7 +40,7 @@ class Player {
     }
 
     moveLeft() {
-        if (this.positionX > 0) {  
+        if (this.positionX > 0) {
             this.positionX--;
             this.updatePlayerPosition();
         }
@@ -49,24 +49,27 @@ class Player {
 
     moveJump() {
         if (!this.isJumping && this.positionY === 0) {
-            this.velocityY = 5; 
+            this.velocityY = 5;
             this.isJumping = true;
         }
     }
 
     moveDown() {
-        this.positionY--;
-        this.updatePlayerPosition();
+        if (this.positionY > 0) {
+            this.positionY--;
+            this.updatePlayerPosition();
+        }
+
     }
 
     updateLivesUI() {
-    const livesElm = document.getElementById("lives");
-    if (livesElm) {
-        livesElm.textContent = `Lives: ${this.lives}`;
+        const livesElm = document.getElementById("lives");
+        if (livesElm) {
+            livesElm.textContent = `Lives: ${this.lives}`;
+        }
+
+
     }
-
-
-}
 
 }
 
@@ -75,8 +78,8 @@ class Player {
 
 class Obstacle {
     constructor() {
-        this.width = 5;
-        this.height = 5;
+        this.width = 10;
+        this.height = 10;
         this.positionX = 100;
         const maxJumpHeight = 20;
         this.positionY = Math.floor(Math.random() * (maxJumpHeight - this.height));
@@ -94,16 +97,24 @@ class Obstacle {
         this.obstacleElm.style.height = this.height + "vw"
     }
 
-    
+
     createObjects() {
         this.obstacleElm = document.createElement("div");
-        this.obstacleElm.classList.add("obstacle");
-        this.obstacleElm.classList.add(this.type);
+        this.obstacleElm.classList.add("obstacle", this.type);
+
+        if (this.type === "helpful") {
+            const randomImage = helpfulImages[Math.floor(Math.random() * helpfulImages.length)]
+            this.obstacleElm.style.backgroundImage = `url(./media/food/${randomImage})`;
+            this.obstacleElm.style.backgroundSize = "contain";
+            this.obstacleElm.style.backgroundRepeat = "no-repeat";
+            this.obstacleElm.style.backgroundPosition = "center";
+
+        }
         const parentElm = document.getElementById("board");
         parentElm.appendChild(this.obstacleElm);
     }
 
-    
+
 
     horizontalMovement() {
         this.positionX--;
@@ -137,13 +148,13 @@ setInterval(() => {
     }
 }, 50);
 
-
+let spawnDelay = 4000;
 function spawnObstacleRandomly() {
     const newObstacle = new Obstacle();
     obstacle.push(newObstacle);
 
-    const delay = Math.random() * (1000 - 1500) + 2000;
-    setTimeout(spawnObstacleRandomly, delay);
+    spawnDelay = Math.max(400, spawnDelay * 0.98);
+    setTimeout(spawnObstacleRandomly, spawnDelay);
 }
 
 spawnObstacleRandomly();
@@ -160,26 +171,26 @@ setInterval(() => {
             player.positionY < obInstance.positionY + obInstance.height &&
             player.positionY + player.height > obInstance.positionY
         ) {
-            if (obInstance.type === "harmful"){
+            if (obInstance.type === "harmful") {
                 player.lives--;
-            }else if (obInstance.type === "helpful"){
+            } else if (obInstance.type === "helpful") {
                 if (player.lives < 5) player.lives++;
             }
 
             player.updateLivesUI();
             obInstance.obstacleElm.remove();
-            obstacle.splice(obstacle.indexOf(obInstance),1);
+            obstacle.splice(obstacle.indexOf(obInstance), 1);
 
-            if (player.lives <=0){
-                location.href = "gameover.html"
+            if (player.lives <= 0) {
+                location.href = "gameover.html";
             }
-            
-            
+
+
         };
     });
 
 
-}, 300);
+}, 100);
 
 
 
@@ -198,5 +209,5 @@ setInterval(() => {
     if (keys["ArrowRight"]) player.moveRight();
     if (keys["ArrowLeft"]) player.moveLeft();
     if (keys["ArrowDown"]) player.moveDown();
-    if (keys["ArrowUp"]) player.moveJump(); 
+    if (keys["ArrowUp"]) player.moveJump();
 }, 50);
