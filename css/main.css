@@ -11,11 +11,11 @@ body {
 
     font-family: "Doto", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: 900;
     font-style: normal;
     font-variation-settings:
         "ROND" 0;
-    
+
 }
 
 #start-game {
@@ -50,11 +50,77 @@ body {
 
 #lives {
     font-size: 5vw;
-    font-weight:bolder;
-        
+    font-weight: bolder;
+    color: white;
+    position: absolute;
+    
 }
+
+
+#score {
+    font-size: 5vw;
+    font-weight: bolder;
+    color: white;
+    position: absolute;
+    right: 0vw;
+}
+
 
 #game-over {
 
     text-align: center;
+}
+
+#back-start-button {
+    background-color: lightcoral;
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "ROND" 0;
+
+
+}
+
+#play-again-button {
+
+    background-color: lightgreen;
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "ROND" 0;
+
+}
+
+#h2-game-over {
+
+    background-color:rgba(255, 255, 255, 0.137);
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "ROND" 0;
+
+}
+
+#logo {
+    display: block;
+    margin:  auto; 
+    width: auto;
+    height: 30vw; 
+    max-height: 30vh;
+}
+
+#h1-start {
+    background-color:rgba(255, 255, 255, 0.137);
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+        "ROND" 0;
 }
