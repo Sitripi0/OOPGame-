@@ -2,8 +2,8 @@ const helpfulImages = ["kebab.png", "frites.png", "kapsalon.png"];
 class Player {
 
     constructor() {
-        this.width = 10;
-        this.height = 10;
+        this.width = 5;
+        this.height = 5;
         this.positionX = 5;
         this.positionY = 0;
         this.velocityY = 8;
@@ -84,6 +84,8 @@ class Obstacle {
         const maxJumpHeight = 20;
         this.positionY = Math.floor(Math.random() * (maxJumpHeight - this.height));
         this.type = Math.random() < 0.7 ? "harmful" : "helpful";
+        this.speed = obstacleSpeed;
+
         this.createObjects();
         this.updateObjectPosition();
 
@@ -117,7 +119,7 @@ class Obstacle {
 
 
     horizontalMovement() {
-        this.positionX--;
+        this.positionX-=obstacleSpeed;
         this.updateObjectPosition();
 
     }
@@ -128,7 +130,7 @@ class Obstacle {
 
 
 
-
+let obstacleSpeed = 1;
 const player = new Player()
 const obstacle = [];
 
@@ -150,9 +152,10 @@ setInterval(() => {
 
 let spawnDelay = 4000;
 function spawnObstacleRandomly() {
-    const newObstacle = new Obstacle();
+    const newObstacle = new Obstacle(obstacleSpeed);
     obstacle.push(newObstacle);
-
+    
+    obstacleSpeed = Math.min(obstacleSpeed + 0.05, 10);
     spawnDelay = Math.max(400, spawnDelay * 0.98);
     setTimeout(spawnObstacleRandomly, spawnDelay);
 }
@@ -164,6 +167,12 @@ spawnObstacleRandomly();
 setInterval(() => {
     obstacle.forEach((obInstance) => {
         obInstance.horizontalMovement();
+
+        if (obInstance.positionX + obInstance.width < 0) {
+            obInstance.obstacleElm.remove();
+            obstacle.splice(obstacle.indexOf(obInstance), 1);
+        }
+
 
         if (
             player.positionX < obInstance.positionX + obInstance.width &&
@@ -180,6 +189,7 @@ setInterval(() => {
             player.updateLivesUI();
             obInstance.obstacleElm.remove();
             obstacle.splice(obstacle.indexOf(obInstance), 1);
+            
 
             if (player.lives <= 0) {
                 location.href = "gameover.html";
