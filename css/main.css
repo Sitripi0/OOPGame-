@@ -53,7 +53,7 @@ body {
     font-weight: bolder;
     color: white;
     position: absolute;
-    
+
 }
 
 
@@ -97,7 +97,7 @@ body {
 
 #h2-game-over {
 
-    background-color:rgba(255, 255, 255, 0.137);
+    background-color: rgba(255, 255, 255, 0.137);
     font-family: "Doto", sans-serif;
     font-optical-sizing: auto;
     font-weight: 900;
@@ -109,18 +109,24 @@ body {
 
 #logo {
     display: block;
-    margin:  auto; 
+    margin: auto;
     width: auto;
-    height: 30vw; 
+    height: 30vw;
     max-height: 30vh;
 }
 
 #h1-start {
-    background-color:rgba(255, 255, 255, 0.137);
+    background-color: rgba(255, 255, 255, 0.137);
     font-family: "Doto", sans-serif;
     font-optical-sizing: auto;
     font-weight: 900;
     font-style: normal;
     font-variation-settings:
         "ROND" 0;
+}
+
+#score-end {
+    font-size: 5vw;
+    font-weight: bolder;
+    color: white;
 }

@@ -199,6 +199,7 @@ setInterval(() => {
 
 
             if (player.lives <= 0) {
+                localStorage.setItem ("finalScore",score);
                 location.href = "gameover.html";
             }
 
@@ -230,9 +231,8 @@ setInterval(() => {
 }, 50);
 
 
-  const startSound = new Audio('./module1\OOP GAME\media\food\cortinilla.mp3/food/');
+const startSound = new Audio('./module1\OOP GAME\media\food\cortinilla.mp3/food/');
 
-  document.getElementById("play-again-button").addEventListener("click", () => {
+document.getElementById("play-again-button").addEventListener("click", () => {
     startSound.play();
-  });
-  
+});

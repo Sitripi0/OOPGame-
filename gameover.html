@@ -15,6 +15,8 @@
 
 <body id="game-over">
     <h1>🔥YOU LIKE IT HOT RIGHT?🔥</h1>
+    <h2 id = "score-end">SCORE: 0</h2>
+
 
     <button  id="play-again-button" onclick="window.location.href = `./index.html`">PLAY AGAIN</button>
     <br></br>
@@ -24,7 +26,15 @@
     <iframe style="border-radius:12px"
         src="https://open.spotify.com/embed/artist/4entYD6viPQOK8AFWih2My?utm_source=generator&theme=0" width="30%"
         height="152" frameBorder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+    </iframe>
+
+     <script>
+        const finalScore = localStorage.getItem("finalScore");
+        if (finalScore !== null) {
+            document.getElementById("score-end").textContent = `SCORE: ${finalScore}`;
+        }
+    </script>
 
 </body>
 
