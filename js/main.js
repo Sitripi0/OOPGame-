@@ -231,8 +231,16 @@ setInterval(() => {
 }, 50);
 
 
-const startSound = new Audio('./module1\OOP GAME\media\food\cortinilla.mp3/food/');
+const startSound = new Audio('../OOP GAME/media/food/cortinilla.mp3');
+startSound.volume = 0.5;
 
 document.getElementById("play-again-button").addEventListener("click", () => {
     startSound.play();
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const gameplayAudio = document.getElementById("gameplay-audio");
+    if (gameplayAudio) {
+        gameplayAudio.volume = 0.2;
+    }
 });
